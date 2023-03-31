@@ -16,12 +16,21 @@ public sealed class WeatherForecastController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<WeatherForecast[]> Get(CancellationToken cancellationToken = default)
+    [ProducesResponseType(200, Type = typeof(WeatherForecast[]))]
+    public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
-        var request = new WeatherForecastQuery();
+        var query = new WeatherForecastQuery();
 
-        var result = await this.mediator.Send(request, cancellationToken);
+        var result = await this.mediator.Send(query, cancellationToken);
 
-        return result;
+        return this.Ok(result);
     }
+
+    //[HttpPut]
+    //public async Task<IActionResult> Put(
+    //    [FromBody] WeatherForecastRequest request,
+    //    CancellationToken cancellationToken = default)
+    //{
+    //    throw new NotImplementedException();
+    //}
 }

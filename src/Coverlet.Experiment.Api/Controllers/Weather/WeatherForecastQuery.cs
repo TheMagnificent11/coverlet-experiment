@@ -1,5 +1,7 @@
-﻿using Coverlet.Experiment.Domain;
+﻿using Coverlet.Experiment.Api.Infrastructure.Data;
+using Coverlet.Experiment.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coverlet.Experiment.Api.Controllers.Weather;
 
@@ -7,15 +9,20 @@ public sealed class WeatherForecastQuery : IRequest<WeatherForecast[]>
 {
     internal class WeatherForecastQueryHandler : IRequestHandler<WeatherForecastQuery, WeatherForecast[]>
     {
-        public Task<WeatherForecast[]> Handle(WeatherForecastQuery request, CancellationToken cancellationToken)
-        {
-            var result = Enumerable
-                .Range(1, 5)
-                .Select(x => DateOnly.FromDateTime(DateTime.Today.AddDays(x)))
-                .Select(x => new WeatherForecast(x, Random.Shared.Next(-20, 55)))
-                .ToArray();
+        private readonly WeatherDbContext dbContext;
 
-            return Task.FromResult(result);
+        public WeatherForecastQueryHandler(WeatherDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        public async Task<WeatherForecast[]> Handle(WeatherForecastQuery request, CancellationToken cancellationToken)
+        {
+            var result = await this.dbContext
+                .Forecasts
+                .ToArrayAsync(cancellationToken);
+
+            return result;
         }
     }
 }
