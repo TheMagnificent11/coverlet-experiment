@@ -5,19 +5,20 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coverlet.Experiment.Api", "src\Coverlet.Experiment.Api\Coverlet.Experiment.Api.csproj", "{78D4D75E-B106-4660-971A-02636415A315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coverlet.Experiment.Api.Tests.Integration", "tests\Coverlet.Experiment.Api.Tests.Integration\Coverlet.Experiment.Api.Tests.Integration.csproj", "{6A7E75D8-F8AC-4CDD-AF24-6BB3B6271151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coverlet.Experiment.Api.Tests.Integration", "tests\Coverlet.Experiment.Api.Tests.Integration\Coverlet.Experiment.Api.Tests.Integration.csproj", "{6A7E75D8-F8AC-4CDD-AF24-6BB3B6271151}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EA0D4264-F260-4353-8713-C747D4F96A3A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 		Packages.props = Packages.props
 		test-coverage.ps1 = test-coverage.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coverlet.Experiment.Domain", "src\Coverlet.Experiment.Domain\Coverlet.Experiment.Domain.csproj", "{187CCB73-73A4-46A1-9780-1B5A8825F72D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coverlet.Experiment.Domain", "src\Coverlet.Experiment.Domain\Coverlet.Experiment.Domain.csproj", "{187CCB73-73A4-46A1-9780-1B5A8825F72D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coverlet.Experiment.Domin.Tests.Unit", "tests\Coverlet.Experiment.Domin.Tests.Unit\Coverlet.Experiment.Domin.Tests.Unit.csproj", "{6AFF7662-F40B-4C06-9034-28829E8B026A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coverlet.Experiment.Domin.Tests.Unit", "tests\Coverlet.Experiment.Domin.Tests.Unit\Coverlet.Experiment.Domin.Tests.Unit.csproj", "{6AFF7662-F40B-4C06-9034-28829E8B026A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
