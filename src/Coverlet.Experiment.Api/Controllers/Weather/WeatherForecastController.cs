@@ -6,7 +6,7 @@ namespace Coverlet.Experiment.Api.Controllers.Weather;
 
 [ApiController]
 [Route("weather-forecast")]
-public class WeatherForecastController : ControllerBase
+public sealed class WeatherForecastController : ControllerBase
 {
     private readonly IMediator mediator;
 

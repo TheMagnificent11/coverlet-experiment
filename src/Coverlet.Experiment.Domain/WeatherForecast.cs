@@ -3,9 +3,15 @@
 public class WeatherForecast
 {
     public WeatherForecast(DateOnly date, int temperatureC)
+        : this()
     {
         this.Date = date;
         this.TemperatureC = temperatureC;
+    }
+
+    // EF constructor
+    private WeatherForecast()
+    {
     }
 
     public DateOnly Date { get; }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Coverlet.Experiment.Api.Controllers.Weather;
 
-public class WeatherForecastQuery : IRequest<WeatherForecast[]>
+public sealed class WeatherForecastQuery : IRequest<WeatherForecast[]>
 {
     internal class WeatherForecastQueryHandler : IRequestHandler<WeatherForecastQuery, WeatherForecast[]>
     {
