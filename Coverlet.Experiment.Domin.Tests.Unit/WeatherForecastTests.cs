@@ -21,6 +21,6 @@ public static class WeatherForecastTests
     public static void Summary(int temperatureC, TemperatureSummary expectedSummary)
     {
         var forecast = new WeatherForecast(DateOnly.FromDateTime(DateTime.Today), temperatureC);
-        forecast.Summary.Should().Be(expectedSummary);
+        forecast.Summary.Should().Be(expectedSummary.ToString());
     }
 }

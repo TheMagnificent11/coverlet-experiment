@@ -14,11 +14,11 @@ public class WeatherForecast
 
     public int TemperatureF => 32 + this.TemperatureC * 9 / 5;
 
-    public TemperatureSummary Summary
+    public string Summary
     {
         get
         {
-            return this.TemperatureC switch
+            var summary = this.TemperatureC switch
             {
                 int n when n <= 0 => TemperatureSummary.Freezing,
                 int n when n > 0 && n <= 5 => TemperatureSummary.Bracing,
@@ -32,6 +32,8 @@ public class WeatherForecast
                 int n when n > 40 => TemperatureSummary.Scorching,
                 _ => TemperatureSummary.Unknown,
             };
+
+            return summary.ToString();
         }
     }
 }
