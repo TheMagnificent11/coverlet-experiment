@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Coverlet.Experiment.Api.Controllers.Weather;
 
 [ApiController]
-[Route("[controller]")]
+[Route("weather-forecast")]
 public class WeatherForecastController : ControllerBase
 {
     private readonly IMediator mediator;
