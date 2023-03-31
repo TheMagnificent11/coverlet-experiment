@@ -1,5 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\Coverlet.Experiment.Domain\Coverlet.Experiment.Domain.csproj" />
-  </ItemGroup>
-</Project>
