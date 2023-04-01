@@ -14,7 +14,8 @@ public partial class Forecasts : Migration
             name: "Forecasts",
             columns: table => new
             {
-                Date = table.Column<DateOnly>(type: "TEXT", nullable: false)
+                Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                TemperatureC = table.Column<int>(type: "INTEGER", nullable: false)
             },
             constraints: table =>
             {

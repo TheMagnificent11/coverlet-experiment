@@ -30,10 +30,16 @@ public sealed class CreateOrUpdateForecastCommand : IRequest
                 .Forecasts
                 .FirstOrDefaultAsync(x => x.Date == request.Date, cancellationToken);
 
-            if (existing != null)
+            if (existing == null)
             {
-
+                this.dbContext.Forecasts.Add(new Domain.WeatherForecast(request.Date, request.TemperatureC));
             }
+            else
+            {
+                existing.UpdateTemperature(request.TemperatureC);
+            }
+
+            await this.dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

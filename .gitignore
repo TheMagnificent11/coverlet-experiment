@@ -21,9 +21,6 @@ Obj/
 # Visual Studio 2015 cache/options directory
 .vs/
 
-# Tye
-/.tye
-
 # Seq logs
 /.logs
 
@@ -32,9 +29,6 @@ Obj/
 /coverage-logs
 /coverage-Report
 
-# Docker Volumes
-/data
-/seq
+# Sqlite DB
+**/data.*
 
-# Dotnet Pack Location
-/output

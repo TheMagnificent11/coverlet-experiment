@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coverlet.Experiment.Api.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20230331124721_Forecasts")]
+    [Migration("20230401021224_Forecasts")]
     partial class Forecasts
     {
         /// <inheritdoc />
@@ -24,6 +24,9 @@ namespace Coverlet.Experiment.Api.Migrations
                 {
                     b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("TemperatureC")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Date");
 

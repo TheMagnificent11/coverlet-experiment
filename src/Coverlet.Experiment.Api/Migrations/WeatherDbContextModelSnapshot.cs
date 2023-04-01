@@ -22,6 +22,9 @@ namespace Coverlet.Experiment.Api.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("TemperatureC")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Date");
 
                     b.ToTable("Forecasts");

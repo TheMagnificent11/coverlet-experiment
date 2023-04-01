@@ -14,9 +14,9 @@ public class WeatherForecast
     {
     }
 
-    public DateOnly Date { get; }
+    public DateOnly Date { get; protected set; }
 
-    public int TemperatureC { get; }
+    public int TemperatureC { get; protected set; }
 
     public int TemperatureF => 32 + this.TemperatureC * 9 / 5;
 
@@ -41,5 +41,15 @@ public class WeatherForecast
 
             return summary.ToString();
         }
+    }
+
+    public void UpdateTemperature(int newTemperatureC)
+    {
+        if (this.TemperatureC == newTemperatureC)
+        {
+            return;
+        }
+
+        this.TemperatureC = newTemperatureC;
     }
 }

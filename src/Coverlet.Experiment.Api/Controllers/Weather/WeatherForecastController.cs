@@ -26,11 +26,16 @@ public sealed class WeatherForecastController : ControllerBase
         return this.Ok(result);
     }
 
-    //[HttpPut]
-    //public async Task<IActionResult> Put(
-    //    [FromBody] WeatherForecastRequest request,
-    //    CancellationToken cancellationToken = default)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    [HttpPut]
+    [ProducesResponseType(200)]
+    public async Task<IActionResult> Put(
+        [FromBody] WeatherForecastRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var command = new CreateOrUpdateForecastCommand(request.Date, request.TemperatureC);
+
+        await this.mediator.Send(command, cancellationToken);
+
+        return this.Ok();
+    }
 }
