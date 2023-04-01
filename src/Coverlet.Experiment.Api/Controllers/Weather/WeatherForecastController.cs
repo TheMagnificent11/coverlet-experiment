@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Coverlet.Experiment.Api.Controllers.Weather;
 
 [ApiController]
-[Route("weather-forecast")]
-public class WeatherForecastController : ControllerBase
+[Route("weather-forecasts")]
+public sealed class WeatherForecastController : ControllerBase
 {
     private readonly IMediator mediator;
 
@@ -16,12 +16,26 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<WeatherForecast[]> Get(CancellationToken cancellationToken = default)
+    [ProducesResponseType(200, Type = typeof(WeatherForecast[]))]
+    public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
-        var request = new WeatherForecastQuery();
+        var query = new WeatherForecastQuery();
 
-        var result = await this.mediator.Send(request, cancellationToken);
+        var result = await this.mediator.Send(query, cancellationToken);
 
-        return result;
+        return this.Ok(result);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(200)]
+    public async Task<IActionResult> Put(
+        [FromBody] WeatherForecastRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var command = new CreateOrUpdateForecastCommand(request.Date, request.TemperatureC);
+
+        await this.mediator.Send(command, cancellationToken);
+
+        return this.Ok();
     }
 }

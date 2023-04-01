@@ -3,14 +3,20 @@
 public class WeatherForecast
 {
     public WeatherForecast(DateOnly date, int temperatureC)
+        : this()
     {
         this.Date = date;
         this.TemperatureC = temperatureC;
     }
 
-    public DateOnly Date { get; }
+    // EF constructor
+    private WeatherForecast()
+    {
+    }
 
-    public int TemperatureC { get; }
+    public DateOnly Date { get; protected set; }
+
+    public int TemperatureC { get; protected set; }
 
     public int TemperatureF => 32 + this.TemperatureC * 9 / 5;
 
@@ -35,5 +41,15 @@ public class WeatherForecast
 
             return summary.ToString();
         }
+    }
+
+    public void UpdateTemperature(int newTemperatureC)
+    {
+        if (this.TemperatureC == newTemperatureC)
+        {
+            return;
+        }
+
+        this.TemperatureC = newTemperatureC;
     }
 }

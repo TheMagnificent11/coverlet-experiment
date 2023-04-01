@@ -1,32 +1,46 @@
+using Coverlet.Experiment.Api.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Coverlet.Experiment;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+        var connectionString = builder.Configuration.GetConnectionString("Default");
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new ApplicationException("Could not find database connection string");
+        }
+
+        builder.Services
+            .AddDbContext<WeatherDbContext>(options => options.UseSqlite(connectionString))
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+
+        builder.Services
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen()
+            .AddHealthChecks()
+            .AddDbContextCheck<WeatherDbContext>();
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
+        app.UseHealthChecks("/health")
+            .UseHttpsRedirection();
 
         app.MapControllers();
+
+        await app.MigrationDatabase<WeatherDbContext>();
 
         app.Run();
     }
