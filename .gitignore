@@ -25,9 +25,9 @@ Obj/
 /.logs
 
 # Test Coverage
-/coverage
 /coverage-logs
-/coverage-Report
+/coverage-report
+/coverage-xml
 
 # Sqlite DB
 **/data.*
