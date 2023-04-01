@@ -18,6 +18,7 @@
     <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" Version="$(DOTNET_VERSION)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Tools" Version="$(DOTNET_VERSION)" />
     <PackageReference Update="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(DOTNET_VERSION)" />
+    <PackageReference Update="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(DOTNET_VERSION)" />
     <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Update="StyleCop.Analyzers" Version="1.1.118" />
     <PackageReference Update="Swashbuckle.AspNetCore" Version="6.5.0" />

@@ -23,7 +23,9 @@ public class Program
 
         builder.Services
             .AddEndpointsApiExplorer()
-            .AddSwaggerGen();
+            .AddSwaggerGen()
+            .AddHealthChecks()
+            .AddDbContextCheck<WeatherDbContext>();
 
         var app = builder.Build();
 
@@ -33,7 +35,9 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        app.UseHealthChecks("/health")
+            .UseHttpsRedirection();
+
         app.MapControllers();
 
         await app.MigrationDatabase<WeatherDbContext>();
