@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		coverage.runsettings = coverage.runsettings
 		Directory.Build.props = Directory.Build.props
 		Packages.props = Packages.props
+		README.md = README.md
 		test-coverage.ps1 = test-coverage.ps1
 	EndProjectSection
 EndProject
