@@ -7,7 +7,7 @@ I am using `Coverlet` on an open source project ([Lewee](https://github.com/TheM
 
 I've created this repository as a more minimal replication of the issue.
 
-My hypothesis is that problem may occur when you use an implemenation of `Xunit.ICollectionFixture<T>` to "reset" a database before each test.
+My hypothesis is that problem may occur when you use an implementation of `Xunit.ICollectionFixture<T>` to "reset" a database before each test.
 
 ## Running the experiment
 
