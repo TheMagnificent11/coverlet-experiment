@@ -1,16 +1,16 @@
 ﻿using System.Text.Json;
 using Coverlet.Experiment.Domain;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Coverlet.Experiment.Api.Tests.Integration;
 
-public class WeatherForecastApiTests : IClassFixture<WebApplicationFactory<Program>>
+[Collection(nameof(WeatherCollection))]
+public class WeatherForecastApiTests : IClassFixture<WeatherWebApplicationFactory>
 {
-    private readonly WebApplicationFactory<Program> factory;
+    private readonly WeatherWebApplicationFactory factory;
 
-    public WeatherForecastApiTests(WebApplicationFactory<Program> factory)
+    public WeatherForecastApiTests(WeatherWebApplicationFactory factory)
     {
         this.factory = factory;
     }

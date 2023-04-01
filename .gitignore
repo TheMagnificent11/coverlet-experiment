@@ -31,4 +31,5 @@ Obj/
 
 # Sqlite DB
 **/data.*
+**/integration-tests-data.*
 
