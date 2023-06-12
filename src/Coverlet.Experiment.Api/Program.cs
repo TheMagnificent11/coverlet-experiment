@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization.Metadata;
 using Coverlet.Experiment.Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,9 @@ public class Program
             .AddDbContext<WeatherDbContext>(options => options.UseSqlite(connectionString))
             .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
-        builder.Services.AddControllers();
+        builder.Services
+            .AddControllers()
+            .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(JsonMetadataServices.DateOnlyConverter));
 
         builder.Services
             .AddEndpointsApiExplorer()

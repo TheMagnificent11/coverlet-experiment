@@ -62,9 +62,14 @@ public abstract class WeatherApiTestsBase : IClassFixture<WeatherWebApplicationF
 
     protected async Task AHealthyApplication()
     {
-        var result = await this.HttpGet<string>("/health");
+        using (var response = await this.HttpRequest(HttpMethod.Get, "/health"))
+        {
+            response.EnsureSuccessStatusCode();
 
-        result.Should().NotBeNull();
-        result.Should().Be("Healthy");
+            var healthStatus = await response.Content.ReadAsStringAsync();
+
+            healthStatus.Should().NotBeNull();
+            healthStatus.Should().Be("Healthy");
+        }
     }
 }
