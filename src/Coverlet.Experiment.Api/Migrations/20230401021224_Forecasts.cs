@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Coverlet.Experiment.Api.Migrations;
 
 /// <inheritdoc />
+[ExcludeFromCodeCoverage]
 public partial class Forecasts : Migration
 {
     /// <inheritdoc />
