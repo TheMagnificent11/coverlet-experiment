@@ -1,11 +1,13 @@
-﻿using System.Text;
+﻿using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using FluentAssertions;
+using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace Coverlet.Experiment.Api.Tests.Integration;
 
-[Collection(nameof(WeatherCollection))]
 public abstract class WeatherApiTestsBase : IClassFixture<WeatherWebApplicationFactory>
 {
     private readonly WeatherWebApplicationFactory factory;
@@ -13,6 +15,24 @@ public abstract class WeatherApiTestsBase : IClassFixture<WeatherWebApplicationF
     protected WeatherApiTestsBase(WeatherWebApplicationFactory factory)
     {
         this.factory = factory;
+
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile($"appsettings.Testing.json")
+            .Build();
+
+        var connectionString = configuration.GetConnectionString("Default")
+            ?? throw new InvalidOperationException("Could not find connection string");
+
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            var command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Forecasts";
+
+            command.ExecuteNonQuery();
+        }
     }
 
     protected static HttpRequestMessage CreateHttpRequestMessage(HttpMethod httpMethod, string apiPath, object content)
@@ -43,13 +63,10 @@ public abstract class WeatherApiTestsBase : IClassFixture<WeatherWebApplicationF
             response.EnsureSuccessStatusCode();
         }
 
-        var json = await response.Content.ReadAsStringAsync();
-        if (json == null)
+        return await response.Content.ReadFromJsonAsync<T>(new JsonSerializerOptions
         {
-            return default;
-        }
-
-        return JsonSerializer.Deserialize<T>(json);
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
     }
 
     protected async Task<T> HttpGet<T>(string apiPath)

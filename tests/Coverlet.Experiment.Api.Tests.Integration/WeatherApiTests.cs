@@ -69,16 +69,15 @@ public sealed class WeatherApiTests : WeatherApiTestsBase
         this.Forecasts.Should().NotBeEmpty();
         this.Forecasts.Should().HaveCount(expectedForecasts.Length);
 
-        // TODO: fix JSON deserialization for DateOnly
-        //for (var i = 0; i < expectedForecasts.Length; i++)
-        //{
-        //    var actual = this.Forecasts[i];
-        //    var expected = expectedForecasts[i];
+        for (var i = 0; i < expectedForecasts.Length; i++)
+        {
+            var actual = this.Forecasts[i];
+            var expected = expectedForecasts[i];
 
-        //    actual.Should().NotBeNull();
-        //    actual.Date.Should().Be(expected.Date);
-        //    actual.TemperatureC.Should().Be(expected.TemperatureC);
-        //    actual.Summary.Should().Be(expected.Summary);
-        //}
+            actual.Should().NotBeNull();
+            actual.Date.Should().Be(expected.Date);
+            actual.TemperatureC.Should().Be(expected.TemperatureC);
+            actual.Summary.Should().Be(expected.Summary);
+        }
     }
 }
